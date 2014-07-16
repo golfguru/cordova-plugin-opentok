@@ -357,6 +357,8 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
           Log.i( TAG, "publisher is publishing" );
           myPublisher.startPublishing();
         }
+      }else if (action.equals("setCameraPosition")) {
+        myPublisher.setCameraPosition(args.getString(0));
       }else if( action.equals( "signal" )){
 
         ArrayList<Connection> connections = new ArrayList<Connection>();
