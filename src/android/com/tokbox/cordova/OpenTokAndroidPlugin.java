@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.hardware.Camera;
+import android.media.AudioManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
   Session.SessionListener, Session.ConnectionListener, Session.SignalListener, 
   Session.PublisherListener, Session.StreamPropertiesListener{
   
+  private AudioManager audioManager;
   private String sessionId;
   protected Session mSession;
   public static final String TAG = "OTPlugin";
@@ -429,6 +431,11 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
     mSession.getConnection().getConnectionId()    );      
     sessionConnected = true;
 
+    if (audioManager == null) {
+      audioManager = (AudioManager)cordova.getActivity().getApplicationContext().getSystemService(Context.AUDIO_SERVICE); 
+      audioManager.setSpeakerphoneOn(true);
+    }
+
     JSONObject data = new JSONObject();
     try{
       data.put("status", "connected");
@@ -454,6 +461,11 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
     subscriberCollection.clear();
     connectionCollection.clear();
     streamCollection.clear();
+
+    if (audioManager != null) {
+      audioManager.setSpeakerphoneOn(false);
+      audioManager = null;
+    }
     
     JSONObject data = new JSONObject();   
     try{
