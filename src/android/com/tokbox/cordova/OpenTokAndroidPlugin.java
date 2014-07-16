@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.hardward.Camera;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,6 +136,10 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
 
     public void startPublishing(){
       cordova.getActivity().runOnUiThread( this );
+    }
+
+    public void setCameraPosition(String position) {
+      mPublisher.swapCamera();
     }
 
     public void run() {
