@@ -468,7 +468,7 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
     }
     */
 
-    clearAllViews();
+    myPublisher.clearAllViews();
 
     // delete all data and prevent updateviews from drawing non existent things
     subscriberCollection.clear();
