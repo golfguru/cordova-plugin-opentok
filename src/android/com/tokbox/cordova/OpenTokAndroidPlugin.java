@@ -448,6 +448,10 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
   @Override
   public void onDisconnected(Session arg0) {
     ViewGroup parent = (ViewGroup) cordova.getActivity().findViewById(android.R.id.content);
+    if (parent != null) {
+      parent.removeAllViews();
+    }
+    /*
     for (Map.Entry<String, RunnableSubscriber> entry : subscriberCollection.entrySet() ) { 
       if (null != parent) {
         parent.removeView( entry.getValue().mView  );
@@ -456,6 +460,7 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
     if( myPublisher != null ){
       parent.removeView( myPublisher.mPublisher.getView() );
     }
+    */
     
     // delete all data and prevent updateviews from drawing non existent things
     subscriberCollection.clear();
