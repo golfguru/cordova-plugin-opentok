@@ -449,7 +449,12 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
   public void onDisconnected(Session arg0) {
     ViewGroup parent = (ViewGroup) cordova.getActivity().findViewById(android.R.id.content);
     if (parent != null) {
-      parent.removeAllViews();
+      int children = parent.getChildCount();
+      for (int i = children; i >= 0; i--) {
+        if (parent.getChildAt(i) instanceof RunnableUpdateViews) {
+          parent.removeViewAt(i);
+        }
+      }
     }
     /*
     for (Map.Entry<String, RunnableSubscriber> entry : subscriberCollection.entrySet() ) { 
