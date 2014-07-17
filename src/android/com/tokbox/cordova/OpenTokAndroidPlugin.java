@@ -88,15 +88,6 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
       }
     }
 
-    public void clearAllViews() {
-      for( RunnableUpdateViews viewContainer : allStreamViews ){
-        ViewGroup parent = (ViewGroup) cordova.getActivity().findViewById(android.R.id.content);
-        if (parent != null) {
-          parent.removeView( viewContainer.mView );
-        }
-      }
-    }
-
     public int getZIndex(){
       try{
         return mProperty.getInt(5); 
@@ -456,7 +447,6 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
 
   @Override
   public void onDisconnected(Session arg0) {
-    /*
     ViewGroup parent = (ViewGroup) cordova.getActivity().findViewById(android.R.id.content);
     for (Map.Entry<String, RunnableSubscriber> entry : subscriberCollection.entrySet() ) { 
       if (null != parent) {
@@ -464,12 +454,9 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
       }
     }
     if( myPublisher != null ){
-      parent.removeView( myPublisher.mView  );
+      parent.removeView( myPublisher.mPublisher.getView() );
     }
-    */
-
-    myPublisher.clearAllViews();
-
+    
     // delete all data and prevent updateviews from drawing non existent things
     subscriberCollection.clear();
     connectionCollection.clear();
